@@ -1,20 +1,49 @@
-// Match3.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <string>
+#include <SDL.h>
+#undef main
+#include "SDL_image.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	int width;
+	int height;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	std::string name;
+	name = "prueba";
+	width = 864; //27 
+	//16 x 54
+	height = 640; //20
+	//16 x 40
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	{
+		std::cout << "SDL_INIT";
+		return 0;
+	}
+
+	window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+	if (window == nullptr)
+	{
+		std::cout << "CreateWindow";
+		SDL_Quit();
+		return 0;
+	}
+
+
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (renderer == nullptr)
+	{
+		std::cout << "CreateRenderer";
+		SDL_Quit();
+		return 0;
+	}
+
+	while (true) {
+		SDL_RenderPresent(renderer);
+
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
+	}
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
