@@ -4,7 +4,7 @@ Platform* Platform::ptr;
  SDL_Renderer* Platform::renderer;
 
 
-Platform* Platform::getPtr() {
+Platform* Platform::GetPtr() {
 	if (!ptr)
 		ptr = new Platform();
 	return ptr;

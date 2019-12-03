@@ -4,6 +4,7 @@
 #include <SDL.h>
 #undef main
 #include "SDL_image.h"
+#include "Vector.h"
 
 
 class Platform
@@ -25,7 +26,7 @@ public:
 	void RenderImage(); // Así por ahora
 	void DrawRect(int x, int y, int w, int h);
 	void CheckEvent();
-	static Platform* getPtr();
+	static Platform* GetPtr();
 	~Platform();
 };
 
