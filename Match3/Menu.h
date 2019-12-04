@@ -8,6 +8,10 @@ private:
 	Platform* platform;
 	MouseData mouseData;
 	Vector<Vec2> points;
+	Image* testImage;
+	Uint16 bgTime;
+	Uint32 lastBgTime;
+
 public:
 	Menu();
 	void Input() override;

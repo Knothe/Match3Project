@@ -66,12 +66,22 @@ void Platform::RenderPresent() {
 	SDL_RenderPresent(renderer);
 }
 
-void Platform::RenderImage() {
-	//TODO: RenderTexture
+void Platform::RenderImage(Image* image, int x, int y) {
+	RenderTexture(image, x, y, 0);
 }
 
-void Platform::RenderTexture() {
-
+void Platform::RenderTexture(Image* image, int x, int y, double angle) {
+	SDL_Rect dstrect;
+	dstrect.x = x;
+	dstrect.y = y;
+	dstrect.w = image->GetWidth() * 10;
+	dstrect.h = image->GetHeight() * 10;
+	SDL_Rect srcrect;
+	srcrect.x = image->GetFrame() * image->GetWidth();
+	srcrect.y = 0;
+	srcrect.w = image->GetWidth();
+	srcrect.h = image->GetHeight();
+	SDL_RenderCopyEx(renderer, image->GetTexture(), &srcrect, &dstrect, angle, NULL, SDL_FLIP_NONE);
 }
 
 void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData) {
