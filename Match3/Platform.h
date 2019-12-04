@@ -5,6 +5,8 @@
 #undef main
 #include "SDL_image.h"
 #include "Vector.h"
+#include "MouseData.h"
+#include "Vec2.h"
 
 
 class Platform
@@ -25,7 +27,8 @@ public:
 	void RenderPresent();
 	void RenderImage(); // Así por ahora
 	void DrawRect(int x, int y, int w, int h);
-	void CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp);
+	void DrawPoint(Vec2 v);
+	void CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData);
 	static Platform* GetPtr();
 	~Platform();
 };

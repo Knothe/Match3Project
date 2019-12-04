@@ -1,17 +1,12 @@
 #include "Menu.h"
 Menu::Menu() {
-	posX = 0;
-	posY = 100;
-	right = false;
-	left = false;
-	down = false;
-	up = false;
+
 }
 void Menu::Input() {
 	Vector<int> keysDown;
 	Vector<int> keysUp;
-	platform->CheckEvent(&keysDown, &keysUp);
-	for (int i = 0; i < keysDown.GetSize(); i++) {
+	platform->CheckEvent(&keysDown, &keysUp, &mouseData);
+	/*for (int i = 0; i < keysDown.GetSize(); i++) {
 		switch (keysDown.GetAt(i)) {
 		case SDLK_ESCAPE:
 			state = false;
@@ -39,23 +34,22 @@ void Menu::Input() {
 			break;
 
 		}
-	}
+	}*/
+
+	if (mouseData.leftButton)
+		points.PushBack(mouseData.position);
+
+	mouseData.leftButton = false;
+	mouseData.rightButton = false;
 }
 
 void Menu::Update() {
-	if (right)
-		posX += 2;
-	if (left)
-		posX -= 2;
-	if (up)
-		posY -= 2;
-	if (down)
-		posY += 2;
 }
 
 void Menu::Draw() {
 	platform->RenderClear();
-	platform->DrawRect(posX, posY, 100, 100);
+	for (int i = 0; i < points.GetSize(); i++)
+		platform->DrawPoint(points.GetAt(i));
 	platform->RenderPresent();
 }
 

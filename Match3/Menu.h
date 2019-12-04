@@ -1,16 +1,13 @@
 #pragma once
 #include "State.h"
 
+
 class Menu : public State
 {
 private:
 	Platform* platform;
-	int posX;
-	int posY;
-	bool right;
-	bool left;
-	bool down;
-	bool up;
+	MouseData mouseData;
+	Vector<Vec2> points;
 public:
 	Menu();
 	void Input() override;

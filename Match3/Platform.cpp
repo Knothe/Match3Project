@@ -47,8 +47,14 @@ void Platform::DrawRect(int x, int y, int w, int h) {
 	rect.y = y;
 	rect.w = w;
 	rect.h = h;
-	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-	SDL_RenderDrawRect(renderer, &rect);
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	//SDL_RenderDrawRect(renderer, &rect);
+	SDL_RenderDrawPoint(renderer, x, y);
+}
+
+void Platform::DrawPoint(Vec2 v){
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderDrawPoint(renderer, v.x, v.y);
 }
 
 void Platform::RenderClear() {
@@ -68,7 +74,7 @@ void Platform::RenderTexture() {
 
 }
 
-void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp) {
+void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData) {
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
@@ -84,6 +90,14 @@ void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp) {
 			if (e.key.keysym.sym == SDLK_LEFT)		keysUp->PushBack(SDLK_LEFT);
 			if (e.key.keysym.sym == SDLK_UP)		keysUp->PushBack(SDLK_UP);
 			if (e.key.keysym.sym == SDLK_DOWN)		keysUp->PushBack(SDLK_DOWN);
+			break;
+		case SDL_MOUSEMOTION:
+			mouseData->position.x = e.motion.x;
+			mouseData->position.y = e.motion.y;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (e.button.button == SDL_BUTTON_LEFT)		mouseData->leftButton = true;
+			if (e.button.button == SDL_BUTTON_RIGHT)	mouseData->rightButton = true;
 			break;
 		}
 	}
