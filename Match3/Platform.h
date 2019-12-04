@@ -25,7 +25,7 @@ public:
 	void RenderPresent();
 	void RenderImage(); // Así por ahora
 	void DrawRect(int x, int y, int w, int h);
-	void CheckEvent();
+	void CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp);
 	static Platform* GetPtr();
 	~Platform();
 };

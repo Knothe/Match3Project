@@ -68,8 +68,25 @@ void Platform::RenderTexture() {
 
 }
 
-void Platform::CheckEvent() {
+void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp) {
 	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		switch (e.type) {
+		case SDL_KEYDOWN:
+			if (e.key.keysym.sym == SDLK_RIGHT)		keysDown->PushBack(SDLK_RIGHT);
+			if (e.key.keysym.sym == SDLK_LEFT)		keysDown->PushBack(SDLK_LEFT);
+			if (e.key.keysym.sym == SDLK_UP)		keysDown->PushBack(SDLK_UP);
+			if (e.key.keysym.sym == SDLK_DOWN)		keysDown->PushBack(SDLK_DOWN);
+			if (e.key.keysym.sym == SDLK_ESCAPE)	keysDown->PushBack(SDLK_ESCAPE);
+			break;
+		case SDL_KEYUP:
+			if (e.key.keysym.sym == SDLK_RIGHT)		keysUp->PushBack(SDLK_RIGHT);
+			if (e.key.keysym.sym == SDLK_LEFT)		keysUp->PushBack(SDLK_LEFT);
+			if (e.key.keysym.sym == SDLK_UP)		keysUp->PushBack(SDLK_UP);
+			if (e.key.keysym.sym == SDLK_DOWN)		keysUp->PushBack(SDLK_DOWN);
+			break;
+		}
+	}
 }
 
 Platform::~Platform() {

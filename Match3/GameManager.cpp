@@ -17,15 +17,16 @@ void GameManager::GameLoop() {
 	while (true) {
 		try {
 			if (statesStack.GetSize() == 0)
-				throw MessageException("statesStack size = 0");
+				throw 0;
 			auto estado = statesStack.Top();
-			platform->CheckEvent(); // Possible Modifications
+			estado->Input(); // Possible Modifications
 			estado->Update();
 			estado->Draw();
 			if (!estado->GetState())
 				ReleaseState();
-		}
-		catch (std::exception e) {
+		} catch (int e) {
+			break;
+		} catch (std::exception e) {
 			std::cout << e.what() << std::endl;
 		}
 	}

@@ -5,6 +5,12 @@ class Menu : public State
 {
 private:
 	Platform* platform;
+	int posX;
+	int posY;
+	bool right;
+	bool left;
+	bool down;
+	bool up;
 public:
 	Menu();
 	void Input() override;
@@ -14,4 +20,3 @@ public:
 	void Close() override;
 	~Menu();
 };
-

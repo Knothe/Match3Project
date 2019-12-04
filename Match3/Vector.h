@@ -20,6 +20,7 @@ public:
 	void TightVector();
 	int GetSize();
 	void Print();
+	bool hasValue(T val);
 };
 
 template<class T>
@@ -93,4 +94,13 @@ void Vector<T>::Print() {
 	}
 	std::cout << "Size: " << size << std::endl;
 	std::cout << "Capacity: " << capacity << std::endl;
+}
+
+template<class T>
+bool Vector<T>::hasValue(T val) {
+	for (int i = 0; i < size; i++) {
+		if (arr[i] == val)
+			return true;
+	}
+	return false;
 }
