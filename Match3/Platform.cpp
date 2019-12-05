@@ -1,8 +1,7 @@
 #include "Platform.h"
 
 Platform* Platform::ptr;
- SDL_Renderer* Platform::renderer;
-
+SDL_Renderer* Platform::renderer;
 
 Platform* Platform::GetPtr() {
 	if (!ptr)
@@ -12,29 +11,25 @@ Platform* Platform::GetPtr() {
 
 Platform::Platform() {
 	std::string name = "Match3";
-	width = 864; //27 
-	//16 x 54
-	height = 640; //20
-	//16 x 40
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-	{
+	width = 864; // 288
+	height = 640; // 214 
+	scale = 3;
+
+	if (SDL_Init(SDL_INIT_VIDEO) != 0){
 		std::cout << "SDL_INIT";
 		return;
 	}
 
 	window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-	if (window == nullptr)
-	{
+	if (window == nullptr){
 		std::cout << "CreateWindow";
 		SDL_Quit();
 		return;
 	}
 
-
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr)
-	{
+	if (renderer == nullptr){
 		std::cout << "CreateRenderer";
 		SDL_Quit();
 		return;
@@ -48,8 +43,7 @@ void Platform::DrawRect(int x, int y, int w, int h) {
 	rect.w = w;
 	rect.h = h;
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	//SDL_RenderDrawRect(renderer, &rect);
-	SDL_RenderDrawPoint(renderer, x, y);
+	SDL_RenderDrawRect(renderer, &rect);
 }
 
 void Platform::DrawPoint(Vec2 v){
@@ -67,24 +61,33 @@ void Platform::RenderPresent() {
 }
 
 void Platform::RenderImage(Image* image, int x, int y) {
-	RenderTexture(image, x, y, 0);
+	RenderTexture(image, x, y, image->GetFrame());
 }
 
-void Platform::RenderTexture(Image* image, int x, int y, double angle) {
+void Platform::RenderImage(Image* image, Vec2 pos) {
+	RenderTexture(image, pos.x, pos.y, image->GetFrame());
+}
+
+void Platform::RenderImage(Image* image, Vec2 pos, int frame) {
+	RenderTexture(image, pos.x, pos.y, frame);
+}
+
+void Platform::RenderTexture(Image* image, int x, int y, int frame) {
 	SDL_Rect dstrect;
 	dstrect.x = x;
 	dstrect.y = y;
-	dstrect.w = image->GetWidth() * 10;
-	dstrect.h = image->GetHeight() * 10;
+	dstrect.w = image->GetWidth() * scale;
+	dstrect.h = image->GetHeight() * scale;
 	SDL_Rect srcrect;
-	srcrect.x = image->GetFrame() * image->GetWidth();
+	srcrect.x = frame * image->GetWidth();
 	srcrect.y = 0;
 	srcrect.w = image->GetWidth();
 	srcrect.h = image->GetHeight();
-	SDL_RenderCopyEx(renderer, image->GetTexture(), &srcrect, &dstrect, angle, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(renderer, image->GetTexture(), &srcrect, &dstrect, 0, NULL, SDL_FLIP_NONE);
 }
 
 void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData) {
+	mouseData->ResetClicks();
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
@@ -111,6 +114,30 @@ void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData*
 			break;
 		}
 	}
+}
+
+void Platform::CheckEvent(MouseData* mouseData) {
+	SDL_Event e;
+	mouseData->ResetClicks();
+	while (SDL_PollEvent(&e)) {
+		switch (e.type) {
+		case SDL_MOUSEMOTION:
+			mouseData->position.x = e.motion.x;
+			mouseData->position.y = e.motion.y;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (e.button.button == SDL_BUTTON_LEFT)		mouseData->leftButton = true;
+			if (e.button.button == SDL_BUTTON_RIGHT)	mouseData->rightButton = true;
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (e.button.button == SDL_BUTTON_LEFT)		mouseData->leftButton = false;
+			if (e.button.button == SDL_BUTTON_RIGHT)	mouseData->rightButton = false;
+		}
+	}
+}
+
+int Platform::GetScale() {
+	return scale;
 }
 
 Platform::~Platform() {

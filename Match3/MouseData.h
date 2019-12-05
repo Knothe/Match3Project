@@ -9,4 +9,8 @@ struct MouseData {
 		leftButton = false;
 		rightButton = false;
 	}
+	void ResetClicks() {
+		leftButton = false;
+		rightButton = false;
+	}
 };

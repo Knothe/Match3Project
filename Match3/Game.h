@@ -1,9 +1,7 @@
 #pragma once
 #include "State.h"
-#include "Button.h"
 
-
-class Menu : public State
+class Game : public State
 {
 private:
 	Platform* platform;
@@ -11,14 +9,14 @@ private:
 	Image* testImage;
 	Uint16 bgTime;
 	Uint32 lastBgTime;
-	Button simpleButton;
 
 public:
-	Menu();
+	Game();
 	void Input() override;
 	void Update() override;
 	void Draw() override;
 	void Init() override;
 	void Close() override;
-	~Menu();
+	~Game();
 };
+

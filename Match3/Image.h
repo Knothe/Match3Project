@@ -16,10 +16,12 @@ private:
 
 public:
 	void LoadImage(std::string n, int widthFrame, int heightFrame);
+	void LoadImage(std::string n);
 	SDL_Texture* GetTexture();
 	int GetWidth();
 	int GetHeight();
 	int GetFrame();
 	void NextFrame();
+	Vec2 GetSize();
 };
 
