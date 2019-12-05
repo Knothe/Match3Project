@@ -2,13 +2,18 @@
 
 Platform* Platform::ptr;
 SDL_Renderer* Platform::renderer;
-
+/*
+If the object isn't started, starts it
+@return this pointer
+*/
 Platform* Platform::GetPtr() {
 	if (!ptr)
 		ptr = new Platform();
 	return ptr;
 }
-
+/*
+Sets up the Window
+*/
 Platform::Platform() {
 	std::string name = "Match3";
 	width = 864; // 288
@@ -35,7 +40,13 @@ Platform::Platform() {
 		return;
 	}
 }
-
+/*
+Draws an empty rectangle
+@param x: position in x
+@param y: position in y
+@param w: width of the rect
+@param h: height of the rect
+*/
 void Platform::DrawRect(int x, int y, int w, int h) {
 	SDL_Rect rect;
 	rect.x = x;
@@ -45,33 +56,60 @@ void Platform::DrawRect(int x, int y, int w, int h) {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderDrawRect(renderer, &rect);
 }
-
+/*
+Draws a point on screen
+@param v: position
+*/
 void Platform::DrawPoint(Vec2 v){
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderDrawPoint(renderer, v.x, v.y);
 }
-
+/*
+Clears the Screen
+*/
 void Platform::RenderClear() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 }
-
+/*
+Presents everything rendered on screen
+*/
 void Platform::RenderPresent() {
 	SDL_RenderPresent(renderer);
 }
-
+/*
+Translates data for RenderTexture
+@param image: pointer to image to render
+@param x: position in x
+@param y: position in y
+*/
 void Platform::RenderImage(Image* image, int x, int y) {
 	RenderTexture(image, x, y, image->GetFrame());
 }
-
+/*
+Translates data for RenderTexture
+@param image: pointer to image to render
+@param pos: position
+*/
 void Platform::RenderImage(Image* image, Vec2 pos) {
 	RenderTexture(image, pos.x, pos.y, image->GetFrame());
 }
-
+/*
+Translates data for RenderTexture
+@param image: pointer to image to render
+@param pos: position
+@param frame: frame to draw
+*/
 void Platform::RenderImage(Image* image, Vec2 pos, int frame) {
 	RenderTexture(image, pos.x, pos.y, frame);
 }
-
+/*
+Renders the texture with RenderCopyEx
+@param image: pointer to image to render
+@param x: position in x
+@param y: position in y
+@param frame: frame to draw
+*/
 void Platform::RenderTexture(Image* image, int x, int y, int frame) {
 	SDL_Rect dstrect;
 	dstrect.x = x;
@@ -83,9 +121,15 @@ void Platform::RenderTexture(Image* image, int x, int y, int frame) {
 	srcrect.y = 0;
 	srcrect.w = image->GetWidth();
 	srcrect.h = image->GetHeight();
-	SDL_RenderCopyEx(renderer, image->GetTexture(), &srcrect, &dstrect, 0, NULL, SDL_FLIP_NONE);
+//	SDL_RenderCopyEx(renderer, image->GetTexture(), &srcrect, &dstrect, 0, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopy(renderer, image->GetTexture(), &srcrect, &dstrect);
 }
-
+/*
+Checks Event for keyboard and mouse
+@param keysDown: pointer for vector for all the keys pressed
+@param keysDown: pointer for vector for all the keys up
+@param mouseData: pointer to mouse data
+*/
 void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData) {
 	mouseData->ResetClicks();
 	SDL_Event e;
@@ -115,7 +159,10 @@ void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData*
 		}
 	}
 }
-
+/*
+Checks Event for mose
+@param mouseData: pointer to mouse data
+*/
 void Platform::CheckEvent(MouseData* mouseData) {
 	SDL_Event e;
 	mouseData->ResetClicks();
@@ -135,7 +182,9 @@ void Platform::CheckEvent(MouseData* mouseData) {
 		}
 	}
 }
-
+/*
+@return scale for every image
+*/
 int Platform::GetScale() {
 	return scale;
 }

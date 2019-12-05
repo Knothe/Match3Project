@@ -1,17 +1,24 @@
 #include "Menu.h"
 #include "Game.h"
-
+/*
+Starts the menu
+*/
 Menu::Menu() {
 	bgTime = 300;
 	lastBgTime = SDL_GetTicks();
 }
+/*
+Reads input in Menu
+*/
 void Menu::Input() {
 	platform->CheckEvent(&mouseData);
 
 	if (mouseData.rightButton)
 			state = false;
 }
-
+/*
+Updates everything in Menu
+*/
 void Menu::Update() {
 	
 	if (simpleButton.Update(&mouseData))
@@ -25,7 +32,9 @@ void Menu::Update() {
 		testImage->NextFrame();
 	}
 }
-
+/*
+Draws everything in menu
+*/
 void Menu::Draw() {
 	platform->RenderClear();
 
@@ -44,14 +53,18 @@ void Menu::Draw() {
 
 	platform->RenderPresent();
 }
-
+/*
+Initializes everything in Menu
+*/
 void Menu::Init() {
 	platform = Platform::GetPtr();
 	testImage = new Image();
 	testImage->LoadImage("Arrow-Sheet.png", 4,1);
 	simpleButton.Init("Arrow-Sheet.png", "Sword-Sheet.png", Vec2(300, 300));
 }
-
+/*
+Prepares for delete
+*/
 void Menu::Close() {
 	state = false;
 }

@@ -154,7 +154,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Match3.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MessageException.cpp" />
+    <ClCompile Include="NodoS.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="Vec2.cpp" />
+    <ClCompile Include="Vector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MessageException.h" />
+    <ClInclude Include="MouseData.h" />
+    <ClInclude Include="NodoS.h" />
+    <ClInclude Include="Platform.h" />
+    <ClInclude Include="Stack.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
