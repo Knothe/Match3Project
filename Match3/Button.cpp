@@ -14,11 +14,11 @@ Initializes variables and textures
 @param imageLoc2: image when mouse is over the button
 @param pos: position of the button
 */
-Button::Button(std::string imageLoc1, std::string imageLoc2, Vec2 pos) {
+Button::Button(std::string imageId1, std::string imageId2, Vec2 pos) {
 	platform = Platform::GetPtr();
 	int s = platform->GetScale();
-	plainImage.LoadImage(imageLoc1);
-	hoverImage.LoadImage(imageLoc2);
+	plainImage.LoadImage(imageId1);
+	hoverImage.LoadImage(imageId2);
 	size = plainImage.GetSize() * s;
 	position = pos;
 }
@@ -28,10 +28,10 @@ Initializes variables and textures
 @param imageLoc2: image when mouse is over the button
 @param pos: position of the button
 */
-void Button::Init(std::string imageLoc1, std::string imageLoc2, Vec2 pos) {
+void Button::Init(std::string imageId1, std::string imageId2, Vec2 pos) {
 	int s = platform->GetScale();
-	plainImage.LoadImage(imageLoc1);
-	hoverImage.LoadImage(imageLoc2);
+	plainImage.LoadImage(imageId1);
+	hoverImage.LoadImage(imageId2);
 	size = plainImage.GetSize() * s;
 	position = pos;
 }

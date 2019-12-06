@@ -14,13 +14,14 @@ void Menu::Input() {
 	platform->CheckEvent(&mouseData);
 
 	if (mouseData.rightButton)
-			state = false;
+		audioManager->VolumeMusic(MIX_MAX_VOLUME);
+	if (mouseData.leftButton)
+		audioManager->VolumeMusic(MIX_MAX_VOLUME / 3);
 }
 /*
 Updates everything in Menu
 */
 void Menu::Update() {
-	
 	if (simpleButton.Update(&mouseData))
 		GameManager::getPtr()->SetState(new Game());
 
@@ -40,11 +41,11 @@ void Menu::Draw() {
 
 	simpleButton.Draw();
 
-	/*int scale = platform->GetScale();
+	int scale = platform->GetScale();
 	int x = testImage->GetWidth() * scale;
 	int y = testImage->GetHeight() * scale;
 
-	for (int i = 0; i < 8; i++) {
+	/*for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			platform->RenderImage(testImage, i * x + (10 * i), j * y + (10 * j));
 		}
@@ -58,9 +59,19 @@ Initializes everything in Menu
 */
 void Menu::Init() {
 	platform = Platform::GetPtr();
+	assetManager = AssetManager::getPtr();
+	audioManager = AudioManager::getPtr();
+
+	assetManager->AddTexture("Arrow-Sheet.png", "arrow", 1);
+	assetManager->AddTexture("Sword-Sheet.png", "sword", 1);
+
+	assetManager->AddMusic("Game.wav", "game");
+	assetManager->AddMusic("GameOver.wav", "gameOver");
+
+	audioManager->PlayMusic("game", -1);
 	testImage = new Image();
-	testImage->LoadImage("Arrow-Sheet.png", 4,1);
-	simpleButton.Init("Arrow-Sheet.png", "Sword-Sheet.png", Vec2(300, 300));
+	//testImage->LoadImage("arrow");
+	simpleButton.Init("arrow", "sword", Vec2(300, 300));
 }
 /*
 Prepares for delete

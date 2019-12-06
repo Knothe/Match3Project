@@ -1,5 +1,6 @@
 #pragma once
 #include "Platform.h"
+#include "AssetManager.h"
 #include <string>
 #include <iostream>
 

@@ -15,8 +15,7 @@ private:
 	int actualFrame;
 
 public:
-	void LoadImage(std::string n, int widthFrame, int heightFrame);
-	void LoadImage(std::string n);
+	void LoadImage(std::string id);
 	SDL_Texture* GetTexture();
 	int GetWidth();
 	int GetHeight();

@@ -14,13 +14,13 @@ Platform* Platform::GetPtr() {
 /*
 Sets up the Window
 */
-Platform::Platform() {
+Platform::Platform()  {
 	std::string name = "Match3";
 	width = 864; // 288
 	height = 640; // 214 
 	scale = 3;
 
-	if (SDL_Init(SDL_INIT_VIDEO) != 0){
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0){
 		std::cout << "SDL_INIT";
 		return;
 	}

@@ -1,33 +1,13 @@
 #include "Image.h"
 #include "Platform.h"
-#include "SDL_image.h"
+#include "AssetManager.h"
 
-/*
-Loads the image with various frames
-@param n: name of the image file
-@param widthFrame: number of Frames long
-@param heightFrame: number of Frames height
-*/
-void Image::LoadImage(std::string n, int widthFrame, int heightFrame) {
-	name = "Assets/Images/" + n;
-	SDL_Surface* loadedSurface = IMG_Load(name.c_str());
-	size.x = loadedSurface->w / widthFrame;
-	size.y = loadedSurface->h / heightFrame;
-	image = SDL_CreateTextureFromSurface(Platform::renderer, loadedSurface);
-	totalFrames = widthFrame * heightFrame;
-	actualFrame = 0;
-}
 /*
 Loads a simple image
 @param n: name of the image file
 */
-void Image::LoadImage(std::string n) {
-	name = "Assets/Images/" + n;
-	SDL_Surface* loadedSurface = IMG_Load(name.c_str());
-	size.x = loadedSurface->w;
-	size.y = loadedSurface->h;
-	image = SDL_CreateTextureFromSurface(Platform::renderer, loadedSurface);
-	totalFrames = 0;
+void Image::LoadImage(std::string id) {
+	image = AssetManager::getPtr()->GetTextureData(id, size, totalFrames);
 	actualFrame = 0;
 }
 /*
