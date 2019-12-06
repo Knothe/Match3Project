@@ -4,7 +4,6 @@ Initializes Button variables
 */
 Button::Button() {
 	platform = Platform::GetPtr();
-	int size = platform->GetScale();
 	position.x = 0;
 	position.y = 0;
 }
@@ -29,11 +28,13 @@ Initializes variables and textures
 @param pos: position of the button
 */
 void Button::Init(std::string imageId1, std::string imageId2, Vec2 pos) {
+	
 	int s = platform->GetScale();
 	plainImage.LoadImage(imageId1);
 	hoverImage.LoadImage(imageId2);
 	size = plainImage.GetSize() * s;
 	position = pos;
+	
 }
 /*
 Updates the button and checks mouse inputs

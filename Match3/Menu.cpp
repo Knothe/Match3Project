@@ -12,7 +12,7 @@ Reads input in Menu
 */
 void Menu::Input() {
 	platform->CheckEvent(&mouseData);
-
+	obj->Input(&mouseData);
 	if (mouseData.rightButton)
 		audioManager->VolumeMusic(MIX_MAX_VOLUME);
 	if (mouseData.leftButton)
@@ -24,8 +24,6 @@ Updates everything in Menu
 void Menu::Update() {
 	if (simpleButton.Update(&mouseData))
 		GameManager::getPtr()->SetState(new Game());
-
-
 
 	if (SDL_TICKS_PASSED(SDL_GetTicks(), lastBgTime + bgTime))
 	{
@@ -45,6 +43,7 @@ void Menu::Draw() {
 	int x = testImage->GetWidth() * scale;
 	int y = testImage->GetHeight() * scale;
 
+	obj->Draw();
 	/*for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
 			platform->RenderImage(testImage, i * x + (10 * i), j * y + (10 * j));
@@ -64,6 +63,7 @@ void Menu::Init() {
 
 	assetManager->AddTexture("Arrow-Sheet.png", "arrow", 1);
 	assetManager->AddTexture("Sword-Sheet.png", "sword", 1);
+	assetManager->AddTexture("Sword-Sheet.png", "s", 4);
 
 	assetManager->AddMusic("Game.wav", "game");
 	assetManager->AddMusic("GameOver.wav", "gameOver");
@@ -72,6 +72,8 @@ void Menu::Init() {
 	testImage = new Image();
 	//testImage->LoadImage("arrow");
 	simpleButton.Init("arrow", "sword", Vec2(300, 300));
+
+	obj = new GameObject(0, "s", Vec2(0, 0));
 }
 /*
 Prepares for delete

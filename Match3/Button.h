@@ -15,10 +15,10 @@ private:
 	Platform* platform;
 public:
 	Button();
-	Button(std::string imageLoc1, std::string imageLoc2, Vec2 pos);
+	Button(string imageLoc1, string imageLoc2, Vec2 pos);
 	bool Update(MouseData* mouseData);
 	void Draw();
-	void Init(std::string imageLoc1, std::string imageLoc2, Vec2 pos);
+	void Init(string imageLoc1, string imageLoc2, Vec2 pos);
 	void SetPos(Vec2 pos);
 	~Button();
 };
