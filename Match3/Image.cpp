@@ -7,7 +7,12 @@ Loads a simple image
 @param n: name of the image file
 */
 void Image::LoadImage(std::string id) {
-	image = AssetManager::getPtr()->GetTextureData(id, size, totalFrames);
+	try {
+		image = AssetManager::getPtr()->GetTextureData(id, size, totalFrames);
+	}
+	catch (MessageException e) {
+		std::cout << "Image LoadImage() exception: " << e.what() << std::endl;
+	}
 	actualFrame = 0;
 }
 /*

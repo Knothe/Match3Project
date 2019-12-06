@@ -29,6 +29,7 @@ void AssetManager::AddTexture(string fileName, string id, int frames) {
 	SDL_Surface* loadedSurface = IMG_Load(name.c_str());
 	Vec2 size;
 	size.x = loadedSurface->w / frames;
+
 	size.y = loadedSurface->h;
 	textureTree.insert(id, 
 		new ImageValues(SDL_CreateTextureFromSurface(Platform::renderer, loadedSurface),

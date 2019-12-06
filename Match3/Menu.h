@@ -3,6 +3,7 @@
 #include "Button.h"
 #include "AudioManager.h"
 #include "GameObject.h"
+#include "Graph.h"
 
 class Menu : public State
 {
@@ -15,7 +16,7 @@ private:
 	Uint16 bgTime;
 	Uint32 lastBgTime;
 	Button simpleButton;
-	GameObject* obj;
+	Graph* g;
 public:
 	Menu();
 	void Input() override;
