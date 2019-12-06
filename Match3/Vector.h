@@ -21,6 +21,7 @@ public:
 	int GetSize();
 	void Print();
 	bool hasValue(T val);
+	void PushAt(int pos, T val);
 };
 /*
 Stats class with capacity = 0 and size = 0
@@ -37,9 +38,12 @@ Starts with a set size and capacity
 */
 template<class T>
 Vector<T>::Vector(int size) {
-	size = size;
+	this->size = size;
 	capacity = size;
 	arr = new T[capacity];
+	for (int i = 0; i < size; i++) {
+		arr[i] = NULL;
+	}
 }
 /*
 Return value in a position inside the bounds of the size
@@ -98,7 +102,6 @@ void Vector<T>::CopyNewVector(int newSize) {
 		}
 	}
 	capacity = newSize;
-	delete arr;
 	arr = newArr;
 }
 /*
@@ -131,4 +134,12 @@ bool Vector<T>::hasValue(T val) {
 			return true;
 	}
 	return false;
+}
+/*
+*/
+template<class T>
+void  Vector<T>::PushAt(int pos, T val) {
+	if (pos < size) {
+		arr[pos] = val;
+	}
 }
