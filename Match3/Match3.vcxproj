@@ -154,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -161,14 +163,18 @@
     <ClCompile Include="Match3.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MessageException.cpp" />
+    <ClCompile Include="NodeT.cpp" />
     <ClCompile Include="NodoS.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
@@ -176,10 +182,12 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MessageException.h" />
     <ClInclude Include="MouseData.h" />
+    <ClInclude Include="NodeT.h" />
     <ClInclude Include="NodoS.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Tree.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
