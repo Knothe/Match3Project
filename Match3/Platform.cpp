@@ -19,6 +19,7 @@ Platform::Platform()  {
 	width = 864; // 288
 	height = 640; // 214 
 	scale = 3;
+	frameTime = 100; // 1000 = 1 seg
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0){
 		std::cout << "SDL_INIT";
@@ -187,6 +188,12 @@ void Platform::CheckEvent(MouseData* mouseData) {
 */
 int Platform::GetScale() {
 	return scale;
+}
+/*
+@return time each frame draws
+*/
+Uint16 Platform::GetFrameTime() {
+	return frameTime;
 }
 
 Platform::~Platform() {

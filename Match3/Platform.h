@@ -21,6 +21,8 @@ private:
 	Platform();
 	static Platform* ptr;
 
+	Uint16 frameTime;
+
 	void RenderTexture(Image* image, int x, int y, int frame);
 
 public:
@@ -36,7 +38,7 @@ public:
 	void CheckEvent(MouseData* mouseData);
 	static Platform* GetPtr();
 	int GetScale();
-	
+	Uint16 GetFrameTime();
 	~Platform();
 };
 
