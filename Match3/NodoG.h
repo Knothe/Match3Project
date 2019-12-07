@@ -1,6 +1,9 @@
-#pragma once
+#ifndef _NODOG_H
+#define _NODOG_H
 #include "List.h"
 #include "GameObject.h"
+
+class GameObject;
 
 class NodoG
 {
@@ -14,3 +17,4 @@ public:
 	void SetNewObject(GameObject* o);
 };
 
+#endif

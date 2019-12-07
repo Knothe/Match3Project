@@ -53,3 +53,9 @@ void Image::NextFrame() {
 Vec2 Image::GetSize() {
 	return size;
 }
+/*
+@return total number of frames
+*/
+int Image::GetTotalFrames() {
+	return totalFrames;
+}

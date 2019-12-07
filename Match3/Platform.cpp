@@ -196,6 +196,17 @@ Uint16 Platform::GetFrameTime() {
 	return frameTime;
 }
 
+Vec2 Platform::GetSize() {
+	return Vec2(width, height);
+}
+
+int Platform::GetWitdth() {
+	return width;
+}
+
+int Platform::GetHeight() {
+	return height;
+}
 Platform::~Platform() {
 
 }

@@ -20,6 +20,7 @@ public:
 	int GetWidth();
 	int GetHeight();
 	int GetFrame();
+	int GetTotalFrames();
 	void NextFrame();
 	Vec2 GetSize();
 };

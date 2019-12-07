@@ -268,8 +268,14 @@ template<class U, class T>
 void Tree<U, T>::rotateRight(NodeT<U, T>* r) {
 	NodeT<U, T>* temp = r->parent;
 	if (temp) {
-		temp->left = r->left;
-		temp = temp->left;
+		if (temp->right == r) {
+			temp->right = r->left;
+			temp = temp->right;
+		}
+		else if (temp->left == r) {
+			temp->left = r->left;
+			temp = temp->left;
+		}
 		temp->parent = r->parent;
 		r->left = temp->right;
 		if (temp->right) 	r->left->parent = r;
@@ -294,8 +300,14 @@ template<class U, class T>
 void Tree<U, T>::rotateLeft(NodeT<U, T>* r) {
 	NodeT<U, T>* temp = r->parent;
 	if (temp) {
-		temp->right = r->right;
-		temp = temp->right;
+		if (temp->right == r) {
+			temp->right = r->right;
+			temp = temp->right;
+		}
+		else if (temp->left == r) {
+			temp->left = r->right;
+			temp = temp->left;
+		}
 		temp->parent = r->parent;
 		r->right = temp->left;
 		if (temp->left) 	r->right->parent = r;
@@ -311,6 +323,7 @@ void Tree<U, T>::rotateLeft(NodeT<U, T>* r) {
 		r->parent = root;
 	}
 	checkPrio(r);
+	checkPrio(r);
 }
 /*
 Applies left-right rotation
@@ -320,9 +333,16 @@ template<class U, class T>
 void Tree<U, T>::rotateLeftRight(NodeT<U, T>* r) {
 	NodeT<U, T>* temp = r->parent;
 	if (temp) {
-		temp->left = r->left->right;
-		temp->left->parent = temp;
-		temp = temp->left;
+		if (temp->right == r) {
+			temp->right = r->left->right;
+			temp->right->parent = temp;
+			temp = temp->right;
+		}
+		else if (temp->left == r) {
+			temp->left = r->left->right;
+			temp->left->parent = temp;
+			temp = temp->left;
+		}
 		r->parent = temp;
 		r->left->right = temp->left;
 		if (temp->left)
@@ -362,9 +382,16 @@ template<class U, class T>
 void Tree<U, T>::rotateRightLeft(NodeT<U, T>* r) {
 	NodeT<U, T>* temp = r->parent;
 	if (temp) {
-		temp->right = r->right->left;
-		temp->right->parent = temp;
-		temp = temp->right;
+		if (temp->right == r) {
+			temp->right = r->right->left;
+			temp->right->parent = temp;
+			temp = temp->right;
+		}
+		else if (temp->left == r) {
+			temp->left = r->right->left;
+			temp->left->parent = temp;
+			temp = temp->left;
+		}
 		r->parent = temp;
 		r->right->left = temp->right;
 		if (temp->right)

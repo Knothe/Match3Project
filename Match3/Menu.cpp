@@ -22,8 +22,9 @@ void Menu::Input() {
 Updates everything in Menu
 */
 void Menu::Update() {
-	if (simpleButton.Update(&mouseData))
-		GameManager::getPtr()->SetState(new Game());
+	/*if (simpleButton.Update(&mouseData))
+		GameManager::getPtr()->SetState(new Game());*/
+	g->Update();
 
 	if (SDL_TICKS_PASSED(SDL_GetTicks(), lastBgTime + bgTime))
 	{
@@ -61,12 +62,23 @@ void Menu::Init() {
 	assetManager = AssetManager::getPtr();
 	audioManager = AudioManager::getPtr();
 
-	assetManager->AddTexture("Arrow-Sheet.png", "arrow", 1);
-	assetManager->AddTexture("Arrow-Sheet.png", "as",4);
-	assetManager->AddTexture("Sword-Sheet.png", "sword", 1);
-	assetManager->AddTexture("Sword-Sheet.png", "s", 4);
-	assetManager->AddTexture("Gem-Sheet.png", "g", 4);
-	assetManager->AddTexture("Rupee-Sheet.png", "r", 3);
+	assetManager->AddTexture("Arrow.png", "a", 1);
+	assetManager->AddTexture("Sword.png", "s", 1);
+
+	assetManager->AddTexture("Arrow.png", "arrow", 7);
+	assetManager->AddTexture("Sword.png", "sword", 6);
+	assetManager->AddTexture("Gem.png", "gem", 4);
+	assetManager->AddTexture("Rupee.png", "rupee", 3);
+	assetManager->AddTexture("Coin.png", "coin", 4);
+	assetManager->AddTexture("Board.png", "board", 1);
+
+	assetManager->AddTexture("Selected.png", "select", 1);
+
+	assetManager->AddTexture("ArrowDestroy.png", "arrDes",7);
+	assetManager->AddTexture("SwordDestroy.png", "swoDes", 7);
+	assetManager->AddTexture("GemDestroy.png", "gemDes", 7);
+	assetManager->AddTexture("RupeeDestroy.png", "rupDes", 7);
+	assetManager->AddTexture("CoinDestroy.png", "coiDes", 7);
 
 	g = new Graph();
 
@@ -76,7 +88,7 @@ void Menu::Init() {
 	//audioManager->PlayMusic("game", -1);
 	testImage = new Image();
 	//testImage->LoadImage("arrow");
-	simpleButton.Init("arrow", "sword", Vec2(300, 300));
+	simpleButton.Init("a", "select", Vec2(300, 300));
 }
 /*
 Prepares for delete

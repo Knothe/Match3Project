@@ -4,16 +4,16 @@
 template <class T>
 class List
 {
-private:
 public:
 	NodeL<T>* first;
 	NodeL<T>* last;
 	int size;
 	List();
 	~List();
-
+	void clear();
 	void push_back(T val);
 	T get_at(int index);
+	bool find(T val);
 };
 template <class T>
 List<T>::List() {
@@ -37,7 +37,6 @@ void List<T>::push_back(T val) {
 	}
 	size++;
 }
-
 template <class T>
 T List<T>::get_at(int index) {
 	NodeL<T>* it = first;
@@ -47,4 +46,20 @@ T List<T>::get_at(int index) {
 		it = it->next;
 	}
 	return NULL;
+}
+template<class T>
+void List<T>::clear() {
+	first = NULL;
+	last = NULL;
+	size = 0;
+}
+template<class T>
+bool List<T>::find(T val) {
+	NodeL<T>* it = first;
+	while (it != NULL) {
+		if (it->value == val)
+			return true;
+		it = it->next;
+	}
+	return false;
 }

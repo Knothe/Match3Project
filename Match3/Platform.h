@@ -22,7 +22,6 @@ private:
 	static Platform* ptr;
 
 	Uint16 frameTime;
-
 	void RenderTexture(Image* image, int x, int y, int frame);
 
 public:
@@ -39,6 +38,9 @@ public:
 	static Platform* GetPtr();
 	int GetScale();
 	Uint16 GetFrameTime();
+	Vec2 GetSize();
+	int GetWitdth();
+	int GetHeight();
 	~Platform();
 };
 
