@@ -42,6 +42,7 @@ bool GameObject::Update() {
 }
 
 bool GameObject::Draw(bool s) {
+	onDraw(s);
 	if (isDestroying) {
 		if (SDL_TICKS_PASSED(SDL_GetTicks(), lastFrameTime + frameTime)) {
 			if (onDestroy.GetFrame() == onDestroy.GetTotalFrames() - 1)	return true;
@@ -62,6 +63,10 @@ bool GameObject::Draw(bool s) {
 		platform->RenderImage(&sprite, position);
 	} else 	platform->RenderImage(&sprite, position, 0);
 	return false;
+}
+
+void GameObject::onDraw(bool s) {
+
 }
 
 void GameObject::SetPos(Vec2 pos) {

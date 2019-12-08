@@ -15,6 +15,7 @@ public:
 	void push_back(T val);
 	T get_at(int index);
 	bool find(T val);
+
 };
 template <class T>
 List<T>::List() {

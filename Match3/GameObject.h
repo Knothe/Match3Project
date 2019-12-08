@@ -46,6 +46,7 @@ public:
 	void Destroy();
 	virtual Vector<NodoG*>* DeleteObjects();
 	bool willDestroy();
+	virtual void onDraw(bool s);
 	GameObject(int id, string imageId, Vec2 pos, NodoG* node);
 	GameObject(int id, string imageId, Vec2 iPos,Vec2 finalPos, NodoG* node);
 	

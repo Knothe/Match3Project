@@ -16,6 +16,7 @@ public:
 	Vector();
 	Vector(int size);
 	T GetAt(unsigned int index);
+	T GetLast();
 	void PushBack(T val);
 	void Clear();
 	void TightVector();
@@ -191,4 +192,9 @@ void Vector<T>::order() {
 		arr[biggest] = temp;
 	}
 }
-
+template<class T>
+T Vector<T>::GetLast() {
+	if (size > 0)
+		return  arr[size - 1];
+	return NULL;
+}

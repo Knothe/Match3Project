@@ -10,7 +10,7 @@ SimpleObject::SimpleObject(int id, string imageId, Vec2 iPos, Vec2 finalPos, Nod
 
 void SimpleObject::SelectDestroy(int id) {
 	switch (id) {
-	case 0: onDestroy.LoadImage("arrDes");
+	case 0: onDestroy.LoadImage("bowDes");
 		break;
 	case 1: onDestroy.LoadImage("swoDes");
 		break;
@@ -25,25 +25,21 @@ void SimpleObject::SelectDestroy(int id) {
 	}
 }
 
-bool SimpleObject::Update() {
-	return true;
-}
-
 Vector<NodoG*>* SimpleObject::DeleteObjects() {
 	List<NodoG*> l, toDestroy;
 	Vector<NodoG*>* toDelete;
 
 	int size = -1;
 	toDelete = new Vector<NodoG*>();
-	size += DeleteAround(myNode, Vec2(1, 0), &l);
-	size += DeleteAround(myNode, Vec2(-1, 0), &l);
+	size += deleteAround(myNode, Vec2(1, 0), &l);
+	size += deleteAround(myNode, Vec2(-1, 0), &l);
 	if (size > 3)	
 		toDestroy.Add(&l);
 	l.clear();
 
 	size = -1;
-	size += DeleteAround(myNode, Vec2(0, 1), &l);
-	size += DeleteAround(myNode, Vec2(0, -1), &l);
+	size += deleteAround(myNode, Vec2(0, 1), &l);
+	size += deleteAround(myNode, Vec2(0, -1), &l);
 	if (size > 3)	
 		toDestroy.Add(&l);
 
@@ -55,7 +51,7 @@ Vector<NodoG*>* SimpleObject::DeleteObjects() {
 	return NULL;
 }
 
-int SimpleObject::DeleteAround(NodoG* r, Vec2 dir, List<NodoG*>* l) {
+int SimpleObject::deleteAround(NodoG* r, Vec2 dir, List<NodoG*>* l) {
 	NodoG* temp;
 	for (int i = 0; i < r->list.size; i++) {
 		temp = r->list.get_at(i);
@@ -65,7 +61,7 @@ int SimpleObject::DeleteAround(NodoG* r, Vec2 dir, List<NodoG*>* l) {
 					if(!temp->obj->willDestroy())
 						l->push_back(temp);
 					
-					return DeleteAround(temp, dir, l) + 1;
+					return deleteAround(temp, dir, l) + 1;
 				}
 			}
 		}

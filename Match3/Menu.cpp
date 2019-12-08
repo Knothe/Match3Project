@@ -65,22 +65,26 @@ void Menu::Init() {
 	assetManager->AddTexture("Arrow.png", "a", 1);
 	assetManager->AddTexture("Sword.png", "s", 1);
 
-	assetManager->AddTexture("Arrow.png", "arrow", 7);
+	assetManager->AddTexture("Arrow.png", "bow", 7);
 	assetManager->AddTexture("Sword.png", "sword", 6);
 	assetManager->AddTexture("Gem.png", "gem", 4);
 	assetManager->AddTexture("Rupee.png", "rupee", 3);
 	assetManager->AddTexture("Coin.png", "coin", 4);
 	assetManager->AddTexture("Board.png", "board", 1);
 	assetManager->AddTexture("Wand.png", "wand", 5);
+	assetManager->AddTexture("Potions.png", "potion", 6);
+	assetManager->AddTexture("Direction.png", "direction", 8);
 
 	assetManager->AddTexture("Selected.png", "select", 1);
 
-	assetManager->AddTexture("ArrowDestroy.png", "arrDes",7);
+	assetManager->AddTexture("ArrowDestroy.png", "bowDes",7);
 	assetManager->AddTexture("SwordDestroy.png", "swoDes", 7);
 	assetManager->AddTexture("GemDestroy.png", "gemDes", 7);
 	assetManager->AddTexture("RupeeDestroy.png", "rupDes", 7);
 	assetManager->AddTexture("CoinDestroy.png", "coiDes", 7);
 	assetManager->AddTexture("WandDestroy.png", "wanDes", 7);
+	assetManager->AddTexture("PotionsDestroy.png", "potDes", 8);
+	assetManager->AddTexture("DirectionDestroy.png", "dirDes", 8);
 
 	g = new Graph();
 

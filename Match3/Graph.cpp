@@ -2,12 +2,14 @@
 #include <time.h>
 #include <stdlib.h>
 #include "SimpleObject.h"
+#include "DestroyLine.h"
+#include "DestroySame.h"
 
 Graph::Graph() {
 	platform = Platform::GetPtr();
 	isVisitedCheck = true;
 	insertNodes(8, 8);
-	sprites.PushBack("arrow");
+	sprites.PushBack("bow");
 	sprites.PushBack("sword");
 	sprites.PushBack("gem");
 	sprites.PushBack("rupee");
@@ -84,15 +86,10 @@ void Graph::Draw(NodoG* r) {
 	if (r->visited == isVisitedCheck)
 		return;
 	bool isSelected = selectedList.find(r);
-	if (r->obj) {
-		if (r->obj->Draw(isSelected)) 
-			r->obj = NULL;
-		else if (isSelected)
-			platform->RenderImage(&onSelect, r->obj->GetPos());
-	}
-	else {
+	if (r->obj->Draw(isSelected)) 
 		destroyed++;
-	}
+	else if (isSelected)
+		platform->RenderImage(&onSelect, r->obj->GetPos());
 	r->visited = isVisitedCheck;
 	for (int i = 0; i < r->list.size; i++) {
 		Draw(r->list.get_at(i));
@@ -225,7 +222,6 @@ void Graph::resetVisited(NodoG* r) {
 }
 
 void Graph::reFill() {
-	
 	List<NodoG*>* list = new List<NodoG*>();
 	orderNodes(list);
 	NodeL<NodoG*>* it = list->first;
@@ -281,14 +277,24 @@ NodoG* Graph::searchObj(NodoG* n) {
 void Graph::orderNodes(List<NodoG*>* l) {
 	Vector<NodoG*> vector;
 	NodeL<NodoG*>* it = destroyList.first;
+	int x;
 	while (it) {
-		if (it->value->toDelete->GetSize() == 5)
-			it->value->obj = new SimpleObject(0, sprites.GetAt(0), it->value->position, it->value);
+		x = it->value->obj->GetId();
+		for (int i = 0; i < it->value->toDelete->GetSize(); i++)
+			it->value->toDelete->GetAt(i)->obj = NULL;
+		if (x < 6) {
+			if (it->value->toDelete->GetSize() == 5)
+				it->value->obj = new DestroyLine(it->value->position, it->value);
+			if (it->value->toDelete->GetSize() > 5)
+				it->value->obj = new DestroySame(it->value->position, it->value, &isVisitedCheck);
+		}
+		
+		
 		vector + it->value->toDelete;
 		it = it->next;
 	}
 	vector.order();
-	int x = -1;
+	x = -1;
 	NodoG* n;
 	for (int i = 0; i < vector.GetSize(); i++) {
 		n = vector.GetAt(i);
