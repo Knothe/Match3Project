@@ -12,9 +12,15 @@ public:
 	bool visited;
 	Vec2 position;
 	List<NodoG*> list;
+	Vector<NodoG*>* toDelete;
+
+
 	NodoG(GameObject* o, Vec2 pos);
 	NodoG(Vec2 pos);
-	void SetNewObject(GameObject* o);
+	void SetNewObject(GameObject* o, Vec2 oldPos);
+	bool CreateListObject();
+	void ApplyDestruction();
+	bool operator<(NodoG other);
 };
 
 #endif

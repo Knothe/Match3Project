@@ -71,6 +71,7 @@ void Menu::Init() {
 	assetManager->AddTexture("Rupee.png", "rupee", 3);
 	assetManager->AddTexture("Coin.png", "coin", 4);
 	assetManager->AddTexture("Board.png", "board", 1);
+	assetManager->AddTexture("Wand.png", "wand", 5);
 
 	assetManager->AddTexture("Selected.png", "select", 1);
 
@@ -79,6 +80,7 @@ void Menu::Init() {
 	assetManager->AddTexture("GemDestroy.png", "gemDes", 7);
 	assetManager->AddTexture("RupeeDestroy.png", "rupDes", 7);
 	assetManager->AddTexture("CoinDestroy.png", "coiDes", 7);
+	assetManager->AddTexture("WandDestroy.png", "wanDes", 7);
 
 	g = new Graph();
 

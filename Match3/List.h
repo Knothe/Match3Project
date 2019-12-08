@@ -7,6 +7,7 @@ class List
 public:
 	NodeL<T>* first;
 	NodeL<T>* last;
+	void Add(List<T>* l);
 	int size;
 	List();
 	~List();
@@ -62,4 +63,10 @@ bool List<T>::find(T val) {
 		it = it->next;
 	}
 	return false;
+}
+template<class T>
+void List<T>::Add(List<T>* l) {
+	for (int i = 0; i < l->size; i++) {
+		push_back(l->get_at(i));
+	}
 }

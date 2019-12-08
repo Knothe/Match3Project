@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "MessageException.h"
+#include "List.h"
 
 template<class T>
 class Vector
@@ -22,6 +23,9 @@ public:
 	void Print();
 	bool hasValue(T val);
 	void PushAt(int pos, T val);
+	void operator=(List<T>* l);
+	void operator+(Vector<T>* v);
+	void order();
 };
 /*
 Stats class with capacity = 0 and size = 0
@@ -136,6 +140,9 @@ bool Vector<T>::hasValue(T val) {
 	return false;
 }
 /*
+Adds a value at a certain position
+@param pos: position to push
+@param val: value to add
 */
 template<class T>
 void  Vector<T>::PushAt(int pos, T val) {
@@ -143,3 +150,45 @@ void  Vector<T>::PushAt(int pos, T val) {
 		arr[pos] = val;
 	}
 }
+/*
+Equals this vector to a list
+@param l: list to equal
+*/
+template<class T>
+void  Vector<T>::operator=(List<T>* l) {
+	size = l->size;
+	capacity = size;
+	T* newArr = new T[size];
+	for (int i = 0; i < size; i++) {
+		newArr[i] = l->get_at(i);
+	}
+	arr = newArr;
+}
+/*
+Pushes another vector at the back of this one
+@param v: vector to push
+*/
+template<class T>
+void Vector<T>::operator+(Vector<T>* v) {
+	for (int i = 0; i < v->size; i++)
+		PushBack(v->GetAt(i));
+}
+/*
+Orders the vector
+*/
+template<class T>
+void Vector<T>::order() {
+	int biggest;
+	T temp;
+	for (int i = 0; i < size; i++) {
+		biggest = i;
+		for (int j = i; j < size; j++) {
+			if (*arr[biggest] < *arr[j])
+				biggest = j;
+		}
+		temp = arr[i];
+		arr[i] = arr[biggest];
+		arr[biggest] = temp;
+	}
+}
+

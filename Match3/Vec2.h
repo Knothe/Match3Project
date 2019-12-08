@@ -11,6 +11,11 @@ public:
 	Vec2 operator+(const Vec2 other);
 	Vec2 operator*(int n);
 	void operator=(const Vec2 other);
+	Vec2 operator-(const Vec2 other);
+	Vec2 operator/(int n);
+	bool operator==(const Vec2 other);
+	Vec2 normalize();
+	float size();
 	~Vec2();
 };
 
