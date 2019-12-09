@@ -106,13 +106,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>ExternalLibs\SDL_image\include;ExternalLibs\SDL2\include;ExternalLibs\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>ExternalLibs\SDL2_ttf-2.0.15\include;ExternalLibs\SDL_image\include;ExternalLibs\SDL2\include;ExternalLibs\SDL_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>ExternalLibs\SDL2\lib\x64;ExternalLibs\SDL_Image\lib\x64;ExternalLibs\SDL_mixer\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>ExternalLibs\SDL2_ttf-2.0.15\lib\x64;ExternalLibs\SDL2\lib\x64;ExternalLibs\SDL_Image\lib\x64;ExternalLibs\SDL_mixer\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -157,10 +157,14 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="DestroyLine.cpp" />
+    <ClCompile Include="DestroySame.cpp" />
+    <ClCompile Include="EndGame.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="HighScoreMenu.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Match3.cpp" />
@@ -170,10 +174,12 @@
     <ClCompile Include="NodeT.cpp" />
     <ClCompile Include="NodoG.cpp" />
     <ClCompile Include="NodoS.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="SimpleObject.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vector.cpp" />
@@ -182,10 +188,14 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="DestroyLine.h" />
+    <ClInclude Include="DestroySame.h" />
+    <ClInclude Include="EndGame.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="HighScoreMenu.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Menu.h" />
@@ -195,10 +205,12 @@
     <ClInclude Include="NodeT.h" />
     <ClInclude Include="NodoG.h" />
     <ClInclude Include="NodoS.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="SimpleObject.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vector.h" />

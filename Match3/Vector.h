@@ -59,8 +59,6 @@ template<class T>
 T Vector<T>::GetAt(unsigned int index) {
 	if (index < size)
 		return arr[index];
-	else
-		throw MessageException("Index out of the array");
 }
 /*
 Increments the size of the vector and adds a value at the end
@@ -192,6 +190,9 @@ void Vector<T>::order() {
 		arr[biggest] = temp;
 	}
 }
+/*
+@return last object in the vector
+*/
 template<class T>
 T Vector<T>::GetLast() {
 	if (size > 0)

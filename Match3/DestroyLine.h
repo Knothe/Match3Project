@@ -9,7 +9,7 @@ private:
 	void onDraw(bool s);
 public:
 	DestroyLine(Vec2 pos, NodoG* node);
-	Vector<NodoG*>* DeleteObjects();
+	Vector<NodoG*>* deleteObjects();
 
 };
 

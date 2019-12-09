@@ -15,7 +15,6 @@ public:
 	void PauseMusice();
 	void ResumeMusic();
 	int VolumeMusic(int vol);
-
 	void PlaySFX(string id, int loops = 0, int channel = 0);
 };
 

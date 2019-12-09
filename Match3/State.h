@@ -8,8 +8,8 @@ class StateManager;
 class State
 {
 protected:
-	bool state = true;
-	Platform* platform;
+	bool state = true; 
+	
 public:
 	virtual void Input() = 0;
 	virtual void Update() = 0;

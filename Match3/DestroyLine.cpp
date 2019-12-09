@@ -1,11 +1,19 @@
 #include "DestroyLine.h"
 
+/*
+Initializes variables of the object
+@param pos: position of the object
+@param node: node where it will be stored
+*/
 DestroyLine::DestroyLine(Vec2 pos, NodoG* node) : GameObject(6, "direction", pos, node) {
 	onDestroy.LoadImage("dirDes");
 	isSelected = false;
 }
-
-Vector<NodoG*>* DestroyLine::DeleteObjects() {
+/*
+Creates a list with the nodes that will have their object deleted, dependinig on how you move this tile
+@return vector with the nodes
+*/
+Vector<NodoG*>* DestroyLine::deleteObjects() {
 	if (!isSelected)
 		return NULL;
 	Vector<NodoG*>* toDelete;
@@ -23,11 +31,19 @@ Vector<NodoG*>* DestroyLine::DeleteObjects() {
 	toDelete->PushBack(myNode);
 	return toDelete;
 }
-
+/*
+When the Draw function is called, it will save isSelected
+@param s: if is selected
+*/
 void DestroyLine::onDraw(bool s) {
 	isSelected = s;
 }
-
+/*
+Adds the entire line to the list
+@param r: Node to delete
+@param dir: direction to delete
+@param l: Vector with all the nodes to delete
+*/
 void DestroyLine::deleteLine(NodoG* r, Vec2 dir, Vector<NodoG*>* l) {
 	NodoG* temp;
 	for (int i = 0; i < r->list.size; i++) {

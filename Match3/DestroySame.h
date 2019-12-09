@@ -11,6 +11,6 @@ private:
 	void onDraw(bool s);
 public:
 	DestroySame(Vec2 pos, NodoG* node, bool* isVisited);
-	Vector<NodoG*>* DeleteObjects();
+	Vector<NodoG*>* deleteObjects();
 };
 

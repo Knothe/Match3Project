@@ -1,4 +1,5 @@
 #include "Platform.h"
+#include "SDL_ttf.h"
 
 Platform* Platform::ptr;
 SDL_Renderer* Platform::renderer;
@@ -19,7 +20,7 @@ Platform::Platform()  {
 	width = 864; // 288
 	height = 640; // 214 
 	scale = 3;
-	frameTime = 100; // 1000 = 1 seg
+	frameTime = 70; // 1000 = 1 seg
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0){
 		std::cout << "SDL_INIT";
@@ -40,6 +41,9 @@ Platform::Platform()  {
 		SDL_Quit();
 		return;
 	}
+
+	
+
 }
 /*
 Draws an empty rectangle
@@ -69,7 +73,7 @@ void Platform::DrawPoint(Vec2 v){
 Clears the Screen
 */
 void Platform::RenderClear() {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(renderer, 9, 0, 0, 255);
 	SDL_RenderClear(renderer);
 }
 /*
@@ -131,23 +135,14 @@ Checks Event for keyboard and mouse
 @param keysDown: pointer for vector for all the keys up
 @param mouseData: pointer to mouse data
 */
-void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData) {
+void Platform::CheckEvent(Vector<int>* keysDown, MouseData* mouseData) {
 	mouseData->ResetClicks();
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		switch (e.type) {
 		case SDL_KEYDOWN:
-			if (e.key.keysym.sym == SDLK_RIGHT)		keysDown->PushBack(SDLK_RIGHT);
-			if (e.key.keysym.sym == SDLK_LEFT)		keysDown->PushBack(SDLK_LEFT);
-			if (e.key.keysym.sym == SDLK_UP)		keysDown->PushBack(SDLK_UP);
-			if (e.key.keysym.sym == SDLK_DOWN)		keysDown->PushBack(SDLK_DOWN);
-			if (e.key.keysym.sym == SDLK_ESCAPE)	keysDown->PushBack(SDLK_ESCAPE);
-			break;
-		case SDL_KEYUP:
-			if (e.key.keysym.sym == SDLK_RIGHT)		keysUp->PushBack(SDLK_RIGHT);
-			if (e.key.keysym.sym == SDLK_LEFT)		keysUp->PushBack(SDLK_LEFT);
-			if (e.key.keysym.sym == SDLK_UP)		keysUp->PushBack(SDLK_UP);
-			if (e.key.keysym.sym == SDLK_DOWN)		keysUp->PushBack(SDLK_DOWN);
+			if (e.key.keysym.sym == SDLK_p) keysDown->PushBack(SDLK_p);
+			if (e.key.keysym.sym == SDLK_ESCAPE) keysDown->PushBack(SDLK_ESCAPE);
 			break;
 		case SDL_MOUSEMOTION:
 			mouseData->position.x = e.motion.x;
@@ -158,6 +153,19 @@ void Platform::CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData*
 			if (e.button.button == SDL_BUTTON_RIGHT)	mouseData->rightButton = true;
 			break;
 		}
+	}
+}
+/*
+Checks keyboard events
+@param keysDown: pointer for vector for all the keys pressed
+*/
+
+void Platform::CheckEvent(Vector<int>* keysDown) {
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		if(e.type == SDL_KEYDOWN)
+			if (e.key.keysym.sym == SDLK_p) keysDown->PushBack(SDLK_p);
+			if (e.key.keysym.sym == SDLK_ESCAPE) keysDown->PushBack(SDLK_ESCAPE);
 	}
 }
 /*
@@ -195,18 +203,25 @@ int Platform::GetScale() {
 Uint16 Platform::GetFrameTime() {
 	return frameTime;
 }
-
+/*
+@return size of the screen
+*/
 Vec2 Platform::GetSize() {
 	return Vec2(width, height);
 }
-
+/*
+@return width of the screen
+*/
 int Platform::GetWitdth() {
 	return width;
 }
-
+/*
+@return height of the screen
+*/
 int Platform::GetHeight() {
 	return height;
 }
+
 Platform::~Platform() {
 
 }

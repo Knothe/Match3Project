@@ -19,7 +19,6 @@ public:
 	NodoG(Vec2 pos);
 	void SetNewObject(GameObject* o, Vec2 oldPos);
 	bool CreateListObject();
-	void ApplyDestruction();
 	bool operator<(NodoG other);
 };
 

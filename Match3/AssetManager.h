@@ -5,6 +5,8 @@
 #include "Tree.h"
 #include "Vec2.h"
 #include "SDL_mixer.h"
+#include "SDL_ttf.h"
+#include "List.h"
 
 using std::string;
 
@@ -25,7 +27,8 @@ private:
 	Tree<string, ImageValues*> textureTree;
 	Tree<string, Mix_Music*> mMusic;
 	Tree<string, Mix_Chunk*> mSFX;
-
+	Tree<string, TTF_Font*> fontTree;
+	List<int> highScoreList;
 public:
 	static AssetManager* getPtr();
 	void AddTexture(string fileName, string id, int frames);
@@ -34,6 +37,11 @@ public:
 	void AddSfx(string fileName, string id);
 	Mix_Music* GetMusic(string id);
 	Mix_Chunk* GetSFX(string id);
+	void AddFont(string fileName, string id, int size);
+	TTF_Font* GetFont(string id);
+	void SaveFileScores();
+	bool AddNewScore(int v);
+	List<int>* GetScoreList();
 	~AssetManager();
 };
 

@@ -44,12 +44,14 @@ void AudioManager::ResumeMusic() {
 		Mix_ResumeMusic();
 }
 /*
-
+Plays a SoundEffect
 */
 void AudioManager::PlaySFX(string id, int loops, int channel) {
 	Mix_PlayChannel(channel, assetManager->GetSFX(id), loops);
 }
-
+/*
+Changes the volume of the music
+*/
 int AudioManager::VolumeMusic(int vol) {
 	return Mix_VolumeMusic(vol); // Use MIX_MAX_VOLUME as a base
 }

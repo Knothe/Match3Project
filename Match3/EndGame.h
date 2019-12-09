@@ -1,29 +1,31 @@
 #pragma once
 #include "State.h"
-#include "Button.h"
 #include "AudioManager.h"
-#include "Text.h"
+#include "Graph.h"
+#include "Game.h"
 
-class Menu : public State
+class EndGame : public State
 {
 private:
 	Platform* platform;
 	AssetManager* assetManager;
 	AudioManager* audioManager;
+	Game* game;
 	MouseData mouseData;
-	Button startButton;
-	Button highScoreButton;
-	Button soundButtonOn;
-	Button soundButtonOff;
-	bool hasSound;
-	Image title;
 	Image backGround;
+	Image gameOver;
+	Image highScore;
+	Image finish;
+	Text* scoreText1;
+	Text* scoreText2;
+	bool newHighScore;
 public:
-	Menu();
+	EndGame(Game* game, int score);
 	void Input() override;
 	void Update() override;
 	void Draw() override;
 	void Init() override;
 	void Close() override;
-	~Menu();
+	~EndGame();
 };
+

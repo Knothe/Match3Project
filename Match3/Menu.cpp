@@ -1,100 +1,94 @@
 #include "Menu.h"
 #include "Game.h"
+#include "HighScoreMenu.h"
 /*
 Starts the menu
 */
 Menu::Menu() {
-	bgTime = 300;
-	lastBgTime = SDL_GetTicks();
+	platform = Platform::GetPtr();
+	assetManager = AssetManager::getPtr();
+	audioManager = AudioManager::getPtr();
+	assetManager->AddMusic("Menu.wav", "menu");
+	assetManager->AddMusic("Game.wav", "game");
+	assetManager->AddMusic("GameOver.wav", "gameOver");
+
+	assetManager->AddTexture("Title.png", "title", 1);
+	assetManager->AddTexture("StartButton1.png", "s1", 1);
+	assetManager->AddTexture("StartButton2.png", "s2", 1);
+	assetManager->AddTexture("HighScore1.png", "h1", 1);
+	assetManager->AddTexture("HighScore2.png", "h2", 1);
+	assetManager->AddTexture("SoundOn.png", "sn", 1);
+	assetManager->AddTexture("SoundOff.png", "sf", 1);
+	assetManager->AddTexture("BackGroundMenu.png", "menu", 1);
+
+	assetManager->AddFont("pixelart.ttf", "med", 25);
+	assetManager->AddFont("pixelart.ttf", "big", 50);
+	assetManager->AddFont("pixelart.ttf", "sma", 20);
 }
 /*
 Reads input in Menu
 */
 void Menu::Input() {
 	platform->CheckEvent(&mouseData);
-	g->Input(&mouseData);
-	if (mouseData.rightButton)
-		audioManager->VolumeMusic(MIX_MAX_VOLUME);
-	if (mouseData.leftButton)
-		audioManager->VolumeMusic(MIX_MAX_VOLUME / 3);
+	if (startButton.Update(&mouseData))
+		GameManager::getPtr()->SetState(new Game());
+	if (highScoreButton.Update(&mouseData))
+		GameManager::getPtr()->SetState(new HighScoreMenu());
+	if (hasSound) {
+		if (soundButtonOn.Update(&mouseData)) {
+			audioManager->VolumeMusic(0);
+			hasSound = false;
+		}
+	}
+	else {
+		if (soundButtonOff.Update(&mouseData)) {
+			audioManager->VolumeMusic(MIX_MAX_VOLUME);
+			hasSound = true;
+		}
+	}
+
+	mouseData.ResetClicks();
 }
 /*
 Updates everything in Menu
 */
 void Menu::Update() {
-	/*if (simpleButton.Update(&mouseData))
-		GameManager::getPtr()->SetState(new Game());*/
-	g->Update();
-
-	if (SDL_TICKS_PASSED(SDL_GetTicks(), lastBgTime + bgTime))
-	{
-		lastBgTime = SDL_GetTicks();
-		testImage->NextFrame();
-	}
+	
 }
 /*
 Draws everything in menu
 */
 void Menu::Draw() {
 	platform->RenderClear();
-
-	g->Draw();
-	//simpleButton.Draw();
-
-	int scale = platform->GetScale();
-	int x = testImage->GetWidth() * scale;
-	int y = testImage->GetHeight() * scale;
-
-	/*for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			platform->RenderImage(testImage, i * x + (10 * i), j * y + (10 * j));
-		}
-	}*/
-
-
+	platform->RenderImage(&backGround, Vec2(0, 0));
+	platform->RenderImage(&title, Vec2(36, 60));
+	highScoreButton.Draw();
+	startButton.Draw();
+	if(hasSound)
+		soundButtonOn.Draw();
+	else
+		soundButtonOff.Draw();
+	platform->DrawRect(207, 290, 450, 90);
+	platform->DrawRect(207, 400, 450, 90);
+	platform->DrawRect(207, 510, 450, 90);
 	platform->RenderPresent();
 }
 /*
 Initializes everything in Menu
 */
 void Menu::Init() {
-	platform = Platform::GetPtr();
-	assetManager = AssetManager::getPtr();
-	audioManager = AudioManager::getPtr();
+	audioManager->PlayMusic("menu", -1);
+	if (audioManager->VolumeMusic(-1) > 0)
+		hasSound = true;
+	else
+		hasSound = false;
+	title.LoadImage("title");
+	backGround.LoadImage("menu");
+	startButton.Init("s1", "s2", Vec2( 312, 290));
+	highScoreButton.Init("h1", "h2", Vec2( 192, 400));
+	soundButtonOn.Init("sn", "sf", Vec2( 375, 510));
+	soundButtonOff.Init("sf", "sn", Vec2( 375, 510));
 
-	assetManager->AddTexture("Arrow.png", "a", 1);
-	assetManager->AddTexture("Sword.png", "s", 1);
-
-	assetManager->AddTexture("Arrow.png", "bow", 7);
-	assetManager->AddTexture("Sword.png", "sword", 6);
-	assetManager->AddTexture("Gem.png", "gem", 4);
-	assetManager->AddTexture("Rupee.png", "rupee", 3);
-	assetManager->AddTexture("Coin.png", "coin", 4);
-	assetManager->AddTexture("Board.png", "board", 1);
-	assetManager->AddTexture("Wand.png", "wand", 5);
-	assetManager->AddTexture("Potions.png", "potion", 6);
-	assetManager->AddTexture("Direction.png", "direction", 8);
-
-	assetManager->AddTexture("Selected.png", "select", 1);
-
-	assetManager->AddTexture("ArrowDestroy.png", "bowDes",7);
-	assetManager->AddTexture("SwordDestroy.png", "swoDes", 7);
-	assetManager->AddTexture("GemDestroy.png", "gemDes", 7);
-	assetManager->AddTexture("RupeeDestroy.png", "rupDes", 7);
-	assetManager->AddTexture("CoinDestroy.png", "coiDes", 7);
-	assetManager->AddTexture("WandDestroy.png", "wanDes", 7);
-	assetManager->AddTexture("PotionsDestroy.png", "potDes", 8);
-	assetManager->AddTexture("DirectionDestroy.png", "dirDes", 8);
-
-	g = new Graph();
-
-	assetManager->AddMusic("Game.wav", "game");
-	assetManager->AddMusic("GameOver.wav", "gameOver");
-
-	//audioManager->PlayMusic("game", -1);
-	testImage = new Image();
-	//testImage->LoadImage("arrow");
-	simpleButton.Init("a", "select", Vec2(300, 300));
 }
 /*
 Prepares for delete

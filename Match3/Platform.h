@@ -33,7 +33,8 @@ public:
 	void RenderImage(Image* image, Vec2 pos, int frame);
 	void DrawRect(int x, int y, int w, int h);
 	void DrawPoint(Vec2 v);
-	void CheckEvent(Vector<int>* keysDown, Vector<int>* keysUp, MouseData* mouseData);
+	void CheckEvent(Vector<int>* keysDown, MouseData* mouseData);
+	void CheckEvent(Vector<int>* keysDown);
 	void CheckEvent(MouseData* mouseData);
 	static Platform* GetPtr();
 	int GetScale();

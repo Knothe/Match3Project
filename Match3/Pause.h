@@ -1,29 +1,29 @@
 #pragma once
 #include "State.h"
-#include "Button.h"
 #include "AudioManager.h"
-#include "Text.h"
+#include "Graph.h"
+#include "Game.h"
+#include "Button.h"
 
-class Menu : public State
+class Pause : public State
 {
 private:
 	Platform* platform;
 	AssetManager* assetManager;
 	AudioManager* audioManager;
+	Game* game;
 	MouseData mouseData;
-	Button startButton;
-	Button highScoreButton;
+	Image backGround;
+	bool hasMusic; 
 	Button soundButtonOn;
 	Button soundButtonOff;
-	bool hasSound;
-	Image title;
-	Image backGround;
 public:
-	Menu();
+	Pause(Game* game);
 	void Input() override;
 	void Update() override;
 	void Draw() override;
 	void Init() override;
 	void Close() override;
-	~Menu();
+	~Pause();
 };
+
