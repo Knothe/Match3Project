@@ -1,7 +1,9 @@
 #include "Game.h"
 #include "Pause.h"
 #include "Endgame.h"
-
+/*
+Initializes variables and adds textures
+*/
 Game::Game() {
 	assetManager = AssetManager::getPtr();
 	platform = Platform::GetPtr();

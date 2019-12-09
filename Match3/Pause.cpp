@@ -1,5 +1,8 @@
 #include "Pause.h"
-
+/*
+Initializes variables
+@param g: pointer to the game
+*/
 Pause::Pause(Game* g) {
 	assetManager = AssetManager::getPtr();
 	platform = Platform::GetPtr();
@@ -7,7 +10,9 @@ Pause::Pause(Game* g) {
 	assetManager->AddTexture("BackGroundPause.png", "pause", 1);
 	game = g;
 }
-
+/*
+Checks input and applies
+*/
 void Pause::Input() {
 	Vector<int> input;
 	platform->CheckEvent(&input, &mouseData);
@@ -27,11 +32,13 @@ void Pause::Input() {
 		}
 	}
 }
-
+/**/
 void Pause::Update() {
 
 }
-
+/*
+Draws this screen
+*/
 void Pause::Draw() {
 	platform->RenderClear();
 	game->PauseDraw();
@@ -42,7 +49,9 @@ void Pause::Draw() {
 		soundButtonOff.Draw();
 	platform->RenderPresent();
 }
-
+/*
+Initializes variables
+*/
 void Pause::Init() {
 	backGround.LoadImage("pause");
 	if (audioManager->VolumeMusic(-1) > 0) {
@@ -54,7 +63,9 @@ void Pause::Init() {
 	soundButtonOn.Init("sn", "sf", Vec2(375, 510));
 	soundButtonOff.Init("sf", "sn", Vec2(375, 510));
 }
-
+/*
+Closes and returns music to its state
+*/
 void Pause::Close() {
 	if (hasMusic)
 		audioManager->VolumeMusic(MIX_MAX_VOLUME);

@@ -8,7 +8,4 @@ int main()
 	gameM = GameManager::getPtr();
 	gameM->SetState(new Menu());
 	gameM->GameLoop();
-
-
-
 }

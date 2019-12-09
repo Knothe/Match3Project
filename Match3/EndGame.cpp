@@ -1,4 +1,9 @@
 #include "EndGame.h"
+/*
+Initializes variabless and adds textures
+@param g: pointer to game screen
+@param score: score obtained in game
+*/
 EndGame::EndGame(Game* g, int score) {
 	assetManager = AssetManager::getPtr();
 	platform = Platform::GetPtr();
@@ -14,6 +19,9 @@ EndGame::EndGame(Game* g, int score) {
 	scoreText2 = new Text(Vec2(300, 450), std::to_string(score), "med", { 255, 255, 255 });
 
 }
+/*
+Checks player input
+*/
 void EndGame::Input() {
 	Vector<int> input;
 	platform->CheckEvent(&input, &mouseData);
@@ -25,9 +33,15 @@ void EndGame::Input() {
 	}
 	mouseData.ResetClicks();
 }
+/*
+
+*/
 void EndGame::Update() {
 
 }
+/*
+Draws this screen
+*/
 void EndGame::Draw() {
 	platform->RenderClear();
 	platform->RenderImage(&backGround, Vec2(0, -70));
@@ -38,6 +52,9 @@ void EndGame::Draw() {
 	scoreText2->Draw();
 	platform->RenderPresent();
 }
+/*
+Initializes variables
+*/
 void EndGame::Init() {
 	backGround.LoadImage("over");
 	audioManager->PlayMusic("gameOver");

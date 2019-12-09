@@ -1,10 +1,14 @@
 #include "HighScoreMenu.h"
-
+/*
+Initializes variables
+*/
 HighScoreMenu::HighScoreMenu() {
 	platform = Platform::GetPtr();
 	assetManager = AssetManager::getPtr();
 }
-
+/*
+Checks inputs
+*/
 void HighScoreMenu::Input() {
 	Vector<int> input;
 	platform->CheckEvent(&input);
@@ -14,11 +18,15 @@ void HighScoreMenu::Input() {
 		}
 	}
 }
-
+/*
+Updates screen
+*/
 void HighScoreMenu::Update() {
 
 }
-
+/*
+Draws this screen
+*/
 void HighScoreMenu::Draw() {
 	platform->RenderClear();
 	platform->RenderImage(&backGround, Vec2(0, 0));
@@ -28,7 +36,9 @@ void HighScoreMenu::Draw() {
 	}
 	platform->RenderPresent();
 }
-
+/*
+Initializes variables
+*/
 void HighScoreMenu::Init() {
 	title = new Text(Vec2(200, 100), "High Scores", "big", { 255,255,255 });
 	NodeL<int>* it = assetManager->GetScoreList()->first;
@@ -41,7 +51,7 @@ void HighScoreMenu::Init() {
 	backGround.LoadImage("menu");
 
 }
-
+/**/
 void HighScoreMenu::Close() {
 
 }

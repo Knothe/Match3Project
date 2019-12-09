@@ -25,6 +25,8 @@ Vector<NodoG*>* DestroySame::deleteObjects() {
 		temp = myNode->list.get_at(i);
 		if (temp->position == myNode->position - dir) {
 			idToDestroy = temp->obj->getId();
+			if (idToDestroy == id)
+				return NULL;
 			break;
 		}
 	}
@@ -40,7 +42,11 @@ Gets if the object is currently selected
 void DestroySame::onDraw(bool s) {
 	isSelected = s;
 }
-
+/*
+Adds all nodes with objects of the same id
+@param r: pointer to node to check
+@param l: vector with nodes
+*/
 void DestroySame::deleteSame(NodoG* r, Vector<NodoG*>* l) {
 	if (r->visited == *isVisitedCheck)
 		return;

@@ -17,7 +17,6 @@ public:
 	bool find(T val);
 	bool pushOrdered(T val);
 	void deleteLast();
-	void Print();
 };
 /*
 initializes the list
@@ -137,14 +136,4 @@ void List<T>::deleteLast() {
 		}
 		it = it->next;
 	}
-}
-
-template<class T>
-void List<T>::Print() {
-	NodeL<T>* it = first;
-	while (it) {
-		std::cout << it->value << "   ";
-		it = it->next;
-	}
-	std::cout << std::endl;
 }
